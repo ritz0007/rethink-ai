@@ -18,6 +18,9 @@ SRCS = \
 	learning/stdp.c \
 	learning/prototype.c \
 	perception/retina.c \
+	perception/auditory.c \
+	perception/tactile.c \
+	perception/multimodal.c \
 	perception/som.c \
 	memory/hopfield.c \
 	memory/decay.c \
@@ -63,6 +66,9 @@ learning/hebbian.o: learning/hebbian.c learning/hebbian.h
 learning/stdp.o: learning/stdp.c learning/stdp.h
 learning/prototype.o: learning/prototype.c learning/prototype.h
 perception/retina.o: perception/retina.c perception/retina.h
+perception/auditory.o: perception/auditory.c perception/auditory.h
+perception/tactile.o: perception/tactile.c perception/tactile.h
+perception/multimodal.o: perception/multimodal.c perception/multimodal.h
 perception/som.o: perception/som.c perception/som.h
 memory/hopfield.o: memory/hopfield.c memory/hopfield.h
 memory/decay.o: memory/decay.c memory/decay.h

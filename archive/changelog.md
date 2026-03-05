@@ -10,6 +10,7 @@
 |---------|------|-------|-------------|-------|
 | V0 | 2026-03-05 | Pre-project | Original C++ guide archived | The starting point — a standard AI framework guide that inspired rethink AI, but follows algorithms instead of brain science |
 | V1 | 2026-03-05 | Phase 0-1 | Project structure created, The Neuron phase written | First real neurons — spiking, leaking, firing based on thresholds, not weighted sums |
+| V11 | 2026-03-05 | Phase 11 | Sensory Expansion — auditory, tactile, multi-modal binding | Three new perception modules: cochlea-inspired hearing, somatosensory touch with adaptation, Bayesian multi-modal fusion (STS/SC). 7 guide files, 6 source files, integrated into rethink_brain |
 
 ---
 
@@ -37,3 +38,4 @@
 |---------|-----------|
 | V0 | "Build AI from standard ML algorithms in C++" |
 | V1 | "Build AI that works like a physical brain — neurons that fire, memories that fade, understanding that emerges — in raw C" |
+| V11 | "The brain doesn't see, hear, and touch separately — it fuses. Precision-weighted Bayesian binding, cochlear frequency decomposition, somatosensory adaptation with pain override." |

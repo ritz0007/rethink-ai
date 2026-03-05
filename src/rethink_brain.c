@@ -1,7 +1,7 @@
 /*
  * rethink_brain.c — The Complete Rethink Brain Implementation
  *
- * Rethink AI — Phase 10 / V10
+ * Rethink AI — Phase 11 / V11
  */
 
 #include "rethink_brain.h"
@@ -29,6 +29,9 @@ RethinkBrain *rethink_create(void) {
     
     /* Initialize modules */
     retina_init(&rb->retina, 16);  /* 16x16 retina */
+    auditory_init(&rb->auditory);  /* V11: cochlea */
+    tactile_init(&rb->tactile);    /* V11: somatosensory */
+    multimodal_init(&rb->multimodal); /* V11: multi-modal binding */
     
     rb->memory = hopfield_create(RETHINK_FEATURE_DIM);
     rb->decay_mem = decay_create();
@@ -43,7 +46,7 @@ RethinkBrain *rethink_create(void) {
     rb->causal = causal_create();
     rb->comm = comm_create(RETHINK_FEATURE_DIM);
     
-    brain_log(rb, "Rethink Brain initialized — all modules online");
+    brain_log(rb, "Rethink Brain initialized — all modules online (V11: sensory expansion)");
     return rb;
 }
 
@@ -77,6 +80,24 @@ Experience rethink_experience(RethinkBrain *rb, const float *input, int dim,
     memcpy(exp.features, input, copy_dim * sizeof(float));
     memcpy(rb->current_features, input, copy_dim * sizeof(float));
     exp.dim = copy_dim;
+    
+    /* Step 0 (V11): Multi-modal binding — feed visual features into binding
+       Auditory and tactile are fed separately via their own sense calls;
+       here we always push the visual input if present. */
+    multimodal_set_input(&rb->multimodal, MODALITY_VISUAL,
+                         exp.features, copy_dim, 0.8f, (float)rb->tick);
+    multimodal_bind(&rb->multimodal);
+    
+    /* If multi-modal binding produced a stronger percept, use it */
+    if (rb->multimodal.percept.num_active > 1 &&
+        rb->multimodal.percept.binding_strength > 0.3f) {
+        int bd = rb->multimodal.percept.feature_dim;
+        if (bd > RETHINK_FEATURE_DIM) bd = RETHINK_FEATURE_DIM;
+        memcpy(exp.features, rb->multimodal.percept.features, bd * sizeof(float));
+        memcpy(rb->current_features, rb->multimodal.percept.features, bd * sizeof(float));
+        copy_dim = bd;
+        brain_log(rb, "Multi-modal binding active — using fused percept");
+    }
     
     /* Step 1: Predictive coding — was this expected? */
     predictive_process(rb->predictor, input, copy_dim);

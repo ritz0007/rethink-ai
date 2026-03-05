@@ -1,10 +1,13 @@
 /*
  * rethink_brain.h — The Complete Rethink Brain
  *
- * Rethink AI — Phase 10 / V10
+ * Rethink AI — Phase 11 / V11
  *
  * Connects every module:
  *   - Retina (perception)
+ *   - Auditory System (hearing)          [V11]
+ *   - Tactile System (touch)             [V11]
+ *   - Multi-Modal Binding (fusion)       [V11]
  *   - SOM (spatial mapping)
  *   - Spiking Network (neural substrate)
  *   - Hebbian/STDP (learning)
@@ -26,6 +29,9 @@
 #include "learning/hebbian.h"
 #include "learning/stdp.h"
 #include "perception/retina.h"
+#include "perception/auditory.h"
+#include "perception/tactile.h"
+#include "perception/multimodal.h"
 #include "perception/som.h"
 #include "memory/hopfield.h"
 #include "memory/decay.h"
@@ -72,6 +78,9 @@ typedef struct {
     
     /* Core modules */
     Retina retina;
+    AuditorySystem auditory;         /* V11: cochlea-inspired hearing */
+    TactileSystem tactile;           /* V11: somatosensory touch */
+    MultiModalSystem multimodal;     /* V11: STS/SC multi-modal binding */
     /* SOM som; */  /* Initialized separately due to size */
     HopfieldNet *memory;
     DecayMemory *decay_mem;

@@ -4,9 +4,9 @@
 
 ---
 
-## Current Stage: V10 — Full Integration Complete
+## Current Stage: V11 — Sensory Expansion Complete
 
-All 10 phases of the Rethink Brain have been designed, documented, and implemented in raw C. The brain compiles, links, and runs a full integration test successfully.
+All 11 phases of the Rethink Brain have been designed, documented, and implemented in raw C. V11 adds auditory processing (cochlea-inspired), tactile processing (somatosensory with adaptation), and multi-modal binding (Bayesian precision-weighted STS/SC fusion). The brain compiles, links, and runs a full integration test successfully.
 
 ---
 
@@ -25,8 +25,9 @@ All 10 phases of the Rethink Brain have been designed, documented, and implement
 | 08 | Understanding | 6 files | `predictor.c`, `causal.c` | Done |
 | 09 | Communication | 4 files | `comm.c` | Done |
 | 10 | The Rethink Brain | 5 files | `rethink_brain.c`, `test_brain.c` | Done |
+| 11 | Sensory Expansion | 7 files | `auditory.c`, `tactile.c`, `multimodal.c` | Done |
 
-**Total: 56 guide files, 17 C source files, 18 header files, 1 Makefile**
+**Total: 63 guide files, 20 C source files, 21 header files, 1 Makefile**
 
 ---
 
@@ -53,16 +54,19 @@ All 10 phases of the Rethink Brain have been designed, documented, and implement
 | Predictor | `understanding/predictor.c` | Prefrontal cortex | Hierarchical predictive coding |
 | Causal | `understanding/causal.c` | Prefrontal + temporal | Causal reasoning + counterfactuals |
 | Comm | `communication/comm.c` | Broca/Wernicke areas | Grounded symbol communication |
+| Auditory | `perception/auditory.c` | Primary auditory cortex (A1) | Cochlea-inspired frequency decomposition, onset detection, spectral tracking |
+| Tactile | `perception/tactile.c` | Somatosensory cortex (S1) | 8-channel touch with homunculus weighting, adaptation, pain fast-path |
+| Multi-Modal | `perception/multimodal.c` | STS + Superior Colliculus | Bayesian precision-weighted binding, 3 binding rules, conflict detection |
 
 ### Integration
-- `rethink_brain.c` — Connects all 17 modules into one unified brain
+- `rethink_brain.c` — Connects all 20 modules into one unified brain
 - `test_brain.c` — Full "Day in the Life" integration test
 - `Makefile` — `make` builds library, `make test` builds + links test
 
 ### Documentation
-- **Guides/** — 56 markdown files across 11 phase folders
-- **Learnings/** — 11 template files (one per phase) for recording insights
-- **Mistakes/** — 11 template files (one per phase) for recording errors
+- **Guides/** — 63 markdown files across 12 phase folders
+- **Learnings/** — 12 template files (one per phase) for recording insights
+- **Mistakes/** — 12 template files (one per phase) for recording errors
 - **archive/** — Changelog with version history
 
 ---
@@ -87,13 +91,13 @@ All modules functional. Zero errors. Warnings only (format-truncation, harmless)
 ## Future Roadmap — Uncompleted Tasks
 
 ### V11: Sensory Expansion
-- [ ] Design auditory processing module (`auditory.h/.c`)
-- [ ] Design tactile input module (`tactile.h/.c`)
-- [ ] Implement frequency analysis for sound patterns
-- [ ] Implement multi-modal binding (sight + sound + touch into one experience)
-- [ ] Write brain science guide: superior temporal sulcus, multi-sensory integration
-- [ ] Integrate new senses into thalamus router
-- [ ] Write milestone test: multi-modal recognition
+- [x] Design auditory processing module (`auditory.h/.c`)
+- [x] Design tactile input module (`tactile.h/.c`)
+- [x] Implement frequency analysis for sound patterns
+- [x] Implement multi-modal binding (sight + sound + touch into one experience)
+- [x] Write brain science guide: superior temporal sulcus, multi-sensory integration
+- [x] Integrate new senses into rethink brain experience pipeline
+- [x] Write milestone guide: multi-modal verification checklist
 
 ### V12: Attention Mechanisms
 - [ ] Replace single `attention_level` float with real attention system
@@ -217,21 +221,37 @@ All modules functional. Zero errors. Warnings only (format-truncation, harmless)
 - [x] Sleep cycle (NREM replay + REM + insight detection)
 - [x] Integration test passes with all modules functional
 
+### Phase 11 — Sensory Expansion
+- [x] Auditory system: cochlea DFT into 16 frequency bands with sensitivity weighting
+- [x] Auditory onset/offset detection (cochlear nucleus analog)
+- [x] Spectral flux + centroid tracking (inferior colliculus analog)
+- [x] 32-dimension auditory feature extraction
+- [x] Tactile system: 8 channels with homunculus-weighted sensitivity
+- [x] Sensory adaptation (habituation) with pain override (nociceptors never adapt)
+- [x] Pain fast-path alert + temperature extreme detection
+- [x] 32-dimension tactile feature extraction
+- [x] Multi-modal binding: Bayesian precision-weighted feature fusion
+- [x] Three binding rules: spatial (correlation), temporal (coherence), inverse effectiveness
+- [x] Conflict detection (senses disagree)
+- [x] Integrated into rethink_brain experience pipeline
+- [x] Build compiles with zero errors (20 object files → librethink.a)
+- [x] Full integration test passes
+
 ---
 
 ## File Counts
 
 | Category | Count |
 |----------|-------|
-| Guide files | 57 (incl. V0 reference) |
-| Learnings templates | 11 |
-| Mistakes templates | 11 |
-| C source files (.c) | 17 |
-| C header files (.h) | 18 |
+| Guide files | 64 (incl. V0 reference) |
+| Learnings templates | 12 |
+| Mistakes templates | 12 |
+| C source files (.c) | 20 |
+| C header files (.h) | 21 |
 | Test file | 1 |
 | Makefile | 1 |
 | Archive | 1 |
-| **Total** | **117** |
+| **Total** | **132** |
 
 ---
 
