@@ -1,73 +1,53 @@
-# Rethink AI
+# Nous — A Brain That Thinks
 
-**AI built to mimic how the brain actually works — not statistical algorithms.**
+> **νοῦς** (Greek: *mind*) — AI built to reason like a brain, not predict like a spreadsheet.
 
-Rethink AI is a brain-inspired artificial intelligence system written entirely in raw C. No Python. No PyTorch. No backpropagation. Just neurons, synapses, and biology.
+**Nous** is a brain-inspired AI system written entirely in raw C. No Python. No PyTorch. No backpropagation. No dependencies. Just neurons, synapses, and neuroscience.
 
-It perceives, learns from few examples, remembers and forgets naturally, thinks without input, dreams, feels emotions, reasons about cause and effect, and communicates — all using mechanisms grounded in real neuroscience.
+It perceives the world through vision, hearing, and touch. It learns from one or two examples. Its memories fade and strengthen naturally. It thinks spontaneously, dreams during sleep, feels emotions, reasons about cause and effect, models other minds, monitors its own confidence, and talks to you — all using mechanisms grounded in how the human brain actually works.
 
----
-
-## Why This Exists
-
-Current AI is impressive at prediction. But it doesn't *understand*. It trains on millions of examples, has no real memory, can't explain why something happened, and has no internal life when you're not prompting it.
-
-The human brain does all of this with 20 watts of power.
-
-Rethink AI asks: **what if we built AI the way the brain actually works?**
-
-- Spiking neurons instead of matrix multiplication
-- Hebbian learning instead of backpropagation
-- Memory that fades, strengthens with use, and consolidates during sleep
-- Emotion that modulates attention and learning
-- Causal reasoning, not just correlation
-- Grounded language, not statistical token prediction
+**~7,800 lines of C. 24 brain modules. Zero external libraries.**
 
 ---
 
-## What's Inside
+## Talk To It
 
-### 17 Brain Modules (all in `src/`)
+Nous understands natural language. No need to memorize commands.
 
-| Module | Brain Region | What It Does |
-|--------|-------------|-------------|
-| **LIF Neuron** | Biological neuron | Leaky Integrate-and-Fire spiking |
-| **Synapse** | Synaptic junction | Weighted + delayed connections |
-| **Network** | Neural circuit | Spiking network with spike routing |
-| **Hebbian** | Cortical plasticity | "Fire together, wire together" |
-| **STDP** | Synaptic timing | Spike-timing dependent plasticity |
-| **Prototype** | Inferotemporal cortex | Few-shot category learning |
-| **Retina** | Visual cortex (V1) | Edge detection + lateral inhibition |
-| **SOM** | Cortical maps | Self-organizing topographic maps |
-| **Hopfield** | Hippocampus | Associative content-addressable memory |
-| **Decay** | Hippocampus | Ebbinghaus forgetting + consolidation |
-| **Spontaneous** | Default Mode Network | Thinking without input |
-| **Dream** | Sleep circuits | NREM replay + REM recombination |
-| **Brain Bus** | Thalamus | Signal routing + attention gating |
-| **Emotion** | Amygdala | Fear/reward processing |
-| **Predictor** | Prefrontal cortex | Hierarchical predictive coding |
-| **Causal** | Prefrontal + temporal | Causal reasoning + counterfactuals |
-| **Comm** | Broca/Wernicke areas | Grounded symbol communication |
+```
+nous> hi
+  Hello! I'm Nous — a brain-inspired AI with 24 modules.
+  I just came online. Everything's fresh. Teach me something!
 
-All modules are connected through `rethink_brain.c` — one `rethink_experience()` call triggers the entire perception → emotion → memory → understanding pipeline.
+nous> this is a cat
+  Brain learned category 'cat'
 
-### 10-Phase Learning Guide (56 markdown files)
+nous> this is a dog
+  Brain learned category 'dog'
 
-Each phase follows the pattern: **learn the brain science → understand why it matters → build the code → verify with a milestone.**
+nous> what do you know
+  Learned categories (2):
+    [0] cat  (1 examples)
+    [1] dog  (1 examples)
 
-| Phase | Title | You Learn | You Build |
-|-------|-------|-----------|-----------|
-| 00 | Getting Started | Philosophy, C setup | Project structure |
-| 01 | The Neuron | Action potentials, LIF model | Spiking neurons + network |
-| 02 | Learning Without Backprop | Hebbian, STDP, why backprop is fake | Learning rules |
-| 03 | Seeing the World | Visual cortex, receptive fields | Retina + SOM |
-| 04 | Memory | Hippocampus, forgetting curves | Hopfield + decay memory |
-| 05 | Learning Like a Child | Few-shot, prototype theory | Prototype learner |
-| 06 | Thinking Without Input | Default Mode Network, dreaming | Spontaneous activity + dreams |
-| 07 | The Modular Brain | Brain regions, thalamus routing | Brain bus + emotion |
-| 08 | Understanding | Predictive coding, causality | Predictor + causal network |
-| 09 | Communication | Symbol grounding, language areas | Communication engine |
-| 10 | The Rethink Brain | Full integration | Complete brain |
+nous> how are you
+  I'm doing great! Feeling neutral (·_·).
+  Confidence: 50% | Stamina: 100% | Memories: 0 | Categories: 2
+
+nous> what are you
+  I'm Nous (Greek for 'mind') — a brain-inspired AI.
+  Built from scratch in raw C with zero dependencies.
+  I have 24 modules modeling real brain regions...
+
+nous> tell me something
+  I use Hebbian learning — 'neurons that fire together, wire together.'
+  (Confidence: 50% | Strategy: 'memory_lookup')
+
+nous> bye
+  Goodbye! I've learned 2 categories today. Thanks for teaching me!
+```
+
+It also accepts all 50+ exact commands (`teach`, `show`, `why`, `whatif`, `sleep`, `introspect`, etc.) for precise control. Type `help` to see them all.
 
 ---
 
@@ -77,151 +57,216 @@ Each phase follows the pattern: **learn the brain science → understand why it 
 
 - **GCC** (any version supporting C11)
 - **make**
-- No other dependencies. Seriously.
+- Nothing else. Seriously.
 
 ### Build & Run
 
 ```bash
 cd src
-make          # Builds librethink.a static library
-make test     # Builds and links the integration test
-./test_brain  # Runs "A Day in the Life of the Rethink Brain"
-make clean    # Removes build artifacts
+make          # Builds librethink.a static library (24 modules)
+make chat     # Builds the Nous chatbot
+./chatbot     # Talk to Nous
+
+make test     # Builds integration test
+./test_brain  # Runs "A Day in the Life" demo
+make clean    # Clean build artifacts
 ```
 
-### What You'll See
+---
+
+## 24 Brain Modules
+
+Every module models a real brain region. No shortcuts. No black boxes.
+
+| # | Module | Brain Region | What It Does |
+|---|--------|-------------|-------------|
+| 1 | **LIF Neuron** | Biological neuron | Leaky Integrate-and-Fire spiking |
+| 2 | **Synapse** | Synaptic junction | Weighted connections with delays |
+| 3 | **Network** | Neural circuit | Spiking network with spike routing |
+| 4 | **Hebbian** | Cortical plasticity | "Fire together, wire together" |
+| 5 | **STDP** | Synaptic timing | Spike-timing dependent plasticity |
+| 6 | **Prototype** | Inferotemporal cortex | Few-shot category learning (1-3 examples) |
+| 7 | **Retina** | Primary visual cortex (V1) | Edge detection + lateral inhibition |
+| 8 | **SOM** | Cortical maps | Self-organizing topographic maps |
+| 9 | **Auditory** | Primary auditory cortex (A1) | Cochlea frequency decomposition, onset detection |
+| 10 | **Tactile** | Somatosensory cortex (S1) | 8-channel touch, homunculus weighting, pain fast-path |
+| 11 | **Multi-Modal** | STS + Superior Colliculus | Bayesian precision-weighted multi-sensory binding |
+| 12 | **Hopfield** | Hippocampus | Associative content-addressable memory |
+| 13 | **Decay** | Hippocampus | Ebbinghaus forgetting curve + consolidation |
+| 14 | **Spontaneous** | Default Mode Network | Thinking without input, mental modes |
+| 15 | **Dream** | Sleep circuits | NREM replay + REM recombination + insight |
+| 16 | **Brain Bus** | Thalamus | Signal routing + attention gating |
+| 17 | **Emotion** | Amygdala | Fear/reward processing, emotional memory |
+| 18 | **Attention** | Dorsal/ventral networks | Biased competition, gain modulation, limited budget |
+| 19 | **Predictor** | Prefrontal cortex | Hierarchical predictive coding |
+| 20 | **Causal** | Prefrontal + temporal | Forward/backward causal reasoning + counterfactuals |
+| 21 | **Comm** | Broca/Wernicke areas | Grounded symbol communication |
+| 22 | **Motor** | Basal ganglia + cerebellum | GO/NO-GO action selection, forward model, RPE |
+| 23 | **Social** | TPJ + mPFC + vmPFC | Theory of Mind, trust, mirror neurons, empathy |
+| 24 | **Meta** | aPFC + ACC + dlPFC | Confidence monitoring, strategy selection, self-model |
+
+One `rethink_experience()` call triggers the full pipeline: **perceive → predict → emote → classify → remember → reason**.
+
+---
+
+## What Makes Nous Different
+
+| Traditional AI | Nous |
+|---------------|------|
+| Needs millions of examples | Learns from 1-3 examples |
+| Backpropagation | Hebbian + STDP (biologically plausible) |
+| Static between queries | Thinks spontaneously, even without input |
+| No real memory | Memories fade, strengthen with use, consolidate in sleep |
+| Predicts tokens | Reasons about causes and effects |
+| Flat emotion (none) | Amygdala modulates attention and learning |
+| No self-awareness | Monitors own confidence, adapts strategies |
+| No social understanding | Models other minds, tracks trust, feels empathy |
+| Python + GPU + frameworks | Raw C. Zero dependencies. ~7,800 lines. |
+| Command-only interface | Understands natural language conversation |
+
+---
+
+## Training Nous
+
+### Interactive Teaching
 
 ```
-=== RETHINK BRAIN — A Day in the Life ===
-
---- Learning phase ---
-Learned 3 categories: cat, dog, bird
-
---- Experience phase ---
-Saw 'fluffy_thing': surprise=0.754, understanding=0.570
-Saw 'barking_thing': surprise=0.313, understanding=0.761
-
---- Classification ---
-fluffy_thing -> 'cat' (confidence=1.00)
-barking_thing -> 'dog' (confidence=1.00)
-
---- Causal reasoning ---
-Why slipping? 'slipping' because: wet_ground(60%) <- rain(90%)
-What if rain? 'rain' will cause: wet_ground(100%), slipping(97%), umbrella(99%)
-
---- Communication ---
-Brain says: "cat dog"
-
---- Sleep cycle ---
-Slept for 10 cycles
-Dream insight! novelty=0.81 stability=0.50
+nous> teach cat
+nous> teach dog
+nous> this is a bird
+nous> show fluffy_thing
+nous> what
+  → 'cat' (confidence: 0.95)
 ```
+
+### Batch Training from File
+
+Create a training file (see `data/` folder for examples):
+
+```
+# Format: one fact per line
+teach cat
+teach dog
+cause rain -> wet_ground
+cause wet_ground -> slipping
+vocab sunshine
+vocab thunder
+```
+
+Then:
+
+```
+nous> train data/animals.txt
+```
+
+### Training Data Sources
+
+For larger-scale training, these open datasets can be converted to Nous's format:
+
+| Dataset | What It Contains | URL |
+|---------|-----------------|-----|
+| **ConceptNet** | Commonsense knowledge (IsA, HasA, UsedFor, Causes) | https://conceptnet.io |
+| **WordNet** | Lexical database — word meanings, hierarchies | https://wordnet.princeton.edu |
+| **Simple English Wikipedia** | Human-readable concept descriptions | https://simple.wikipedia.org/wiki/Main_Page |
+| **NELL** | Never-Ending Language Learner — extracted facts | http://rtw.ml.cmu.edu/rtw/ |
+| **DailyDialog** | 13k conversational exchanges | http://yanran.li/dailydialog |
+| **Open Mind Common Sense** | Crowd-sourced commonsense | https://github.com/commonsense/conceptnet5 |
+
+**Conversion guide**: See [Guides/training_data_guide.md](Guides/training_data_guide.md) for how to convert these datasets into Nous training format.
 
 ---
 
 ## Project Structure
 
 ```
-rethink-ai/
-├── Guides/                     # 56 brain-science-first learning guides
-│   ├── 00_getting_started/     # Philosophy + C setup
-│   ├── 01_the_neuron/          # Spiking neurons
-│   ├── 02_learning_without_backprop/
-│   ├── 03_seeing_the_world/    # Perception
-│   ├── 04_memory/              # Hippocampus + forgetting
-│   ├── 05_learning_like_a_child/  # Few-shot learning
-│   ├── 06_thinking_without_input/ # Default Mode + dreams
-│   ├── 07_the_modular_brain/   # Regions + emotion
-│   ├── 08_understanding/       # Prediction + causality
-│   ├── 09_communication/       # Grounded language
-│   └── 10_the_rethink_brain/   # Full integration
-├── Learnings/                  # Personal insight journals (per phase)
-├── Mistakes/                   # Error logs (per phase)
-├── src/                        # All C source code
-│   ├── neurons/                # neuron.c, network.c, synapse.h
-│   ├── learning/               # hebbian.c, stdp.c, prototype.c
-│   ├── perception/             # retina.c, som.c
-│   ├── memory/                 # hopfield.c, decay.c
-│   ├── thinking/               # spontaneous.c, dream.c
-│   ├── modular/                # brain.c, emotion.c
-│   ├── understanding/          # predictor.c, causal.c
-│   ├── communication/          # comm.c
-│   ├── rethink_brain.c/.h      # Master integration
-│   ├── test_brain.c            # Integration test
-│   └── Makefile
-├── archive/                    # Version history + changelog
-├── STATUS.md                   # Current project status + roadmap
-└── README.md                   # This file
+nous/
+├── src/                          # All C source code (~7,800 lines)
+│   ├── neurons/                  # neuron.c, network.c, synapse.h
+│   ├── learning/                 # hebbian.c, stdp.c, prototype.c
+│   ├── perception/               # retina.c, som.c, auditory.c, tactile.c, multimodal.c
+│   ├── memory/                   # hopfield.c, decay.c
+│   ├── thinking/                 # spontaneous.c, dream.c
+│   ├── modular/                  # brain.c, emotion.c, attention.c
+│   ├── understanding/            # predictor.c, causal.c
+│   ├── communication/            # comm.c
+│   ├── motor/                    # motor.c
+│   ├── social/                   # social.c
+│   ├── meta/                     # meta.c
+│   ├── rethink_brain.c/.h        # Master integration (24 modules → 1 brain)
+│   ├── chatbot.c                 # Nous interactive chatbot (NLU + commands)
+│   ├── test_brain.c              # Full integration test
+│   ├── data/                     # Training data files
+│   └── Makefile                  # Build system
+├── Guides/                       # 86 brain-science learning guides
+│   ├── 00_getting_started/       # Philosophy + C setup
+│   ├── 01-15_*/                  # One folder per brain phase
+│   └── training_data_guide.md    # How to train Nous
+├── Learnings/                    # Personal insight journals
+├── Mistakes/                     # Error logs (mistakes are progress)
+├── archive/                      # Version history + changelog
+├── STATUS.md                     # Detailed project status
+└── README.md                     # This file
 ```
 
 ---
 
-## Key Design Principles
+## Design Principles
 
 1. **Brain science first.** Every module starts with neuroscience, not algorithms.
 2. **No backpropagation.** All learning is biologically plausible (Hebbian + STDP).
-3. **No Python.** Raw C11 for speed, transparency, and control.
+3. **No Python.** Raw C11 for speed, transparency, and total control.
 4. **No external libraries.** Only `stdlib.h`, `math.h`, `stdio.h`, `string.h`.
 5. **Memory is natural.** Memories fade, strengthen with use, consolidate during sleep.
 6. **Few-shot learning.** Categories learned from 1-3 examples, not millions.
 7. **Thinking is spontaneous.** The brain has internal activity even without input.
 8. **Emotion is computational.** Fear boosts attention. Reward drives learning.
-9. **Language is grounded.** Words mean something because they're tied to experience.
-10. **Never delete, always version.** Every iteration (V1-V10+) is preserved.
+9. **Language is grounded.** Words mean things because they're tied to experience.
+10. **The brain monitors itself.** Confidence, error detection, strategy adaptation.
 
 ---
 
-## Roadmap
+## Research Directions
 
-**Completed:** V1-V10 (Phases 0-10)
+Active areas for future versions:
 
-| Version | What's Next |
-|---------|------------|
-| V11 | Sensory expansion — auditory, tactile, multi-modal binding |
-| V12 | Real attention mechanisms — spotlight, feature-based, temporal |
-| V13 | Motor system — action planning, sequences, embodied cognition |
-| V14 | Social brain — Theory of Mind, imitation, trust |
-| V15 | Metacognition — confidence monitoring, learning-to-learn, self-model |
-
-Long-term: consciousness, creativity, developmental learning, neuroplasticity.
-
-See [STATUS.md](STATUS.md) for the detailed task checklist.
-
----
-
-## What This Proves
-
-| Claim | Evidence |
-|-------|---------|
-| You don't need Python/PyTorch | Entire system is raw C11 |
-| You don't need backpropagation | Hebbian + STDP learn effectively |
-| You don't need millions of examples | Prototype learner works from 1 example |
-| You don't need transformers | Spiking neurons + predictive coding work |
-| AI can understand, not just predict | Causal reasoning + grounded symbols |
-| Memory can be natural | Decay, consolidation, reconstruction |
-| Thinking can be spontaneous | Default Mode Network, dream engine |
-| Emotion is computational | Amygdala modulates attention + learning |
+| Direction | Brain Basis | Status |
+|-----------|------------|--------|
+| **Consciousness** | Global Workspace Theory, Integrated Information (IIT) | Planned |
+| **Creativity** | Bisociation, analogy, divergent thinking | Planned |
+| **Developmental Learning** | Critical periods, curriculum, self-directed exploration | Planned |
+| **Neuroplasticity** | Synaptogenesis, pruning, structural change | Planned |
+| **Curiosity** | Intrinsic motivation, novelty-seeking, surprise-driven learning | Planned |
 
 ---
 
 ## Philosophy
 
-> "I see AI as a part of our brain and I want it to process the input as our brain does physically instead of some stupid algorithms. It should understand instead of just prediction."
+> *"I see AI as a part of our brain and I want it to process the input as our brain does physically instead of some stupid algorithms. It should understand instead of just prediction."*
 
-This project is an experiment in building AI from first principles — not the first principles of linear algebra, but the first principles of neuroscience. It's intentionally incomplete, intentionally experimental, and intentionally different from everything else out there.
+Nous is an experiment in building AI from the first principles of neuroscience — not linear algebra. It's intentionally different from everything else out there. It doesn't need GPUs, cloud APIs, or terabytes of training data. It needs neurons, synapses, and the courage to build something new.
 
-If a direction seems crazy, try it. That's the point.
+---
+
+## Stats
+
+| Metric | Value |
+|--------|-------|
+| Language | C (C11) |
+| Total lines | ~7,800 |
+| Source files | 52 (25 .c + 25 .h + Makefile + test) |
+| Brain modules | 24 |
+| External dependencies | 0 |
+| Chatbot commands | 50+ (exact) + natural language |
+| Guide files | 86 |
+| Build time | < 3 seconds |
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-*Built with neurons, not matrices.*
+*Built with neurons, not matrices. Named after the Greek word for mind.*
+*Nous V1 — by Ritesh.*

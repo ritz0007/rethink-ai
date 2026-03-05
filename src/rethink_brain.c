@@ -1,7 +1,7 @@
 /*
  * rethink_brain.c — The Complete Rethink Brain Implementation
  *
- * Rethink AI — Phase 11 / V11
+ * Rethink AI — Phase 15 / V15
  */
 
 #include "rethink_brain.h"
@@ -45,8 +45,12 @@ RethinkBrain *rethink_create(void) {
     
     rb->causal = causal_create();
     rb->comm = comm_create(RETHINK_FEATURE_DIM);
+    attention_init(&rb->attention);  /* V12: biased competition */
+    motor_init(&rb->motor);          /* V13: basal ganglia motor */
+    social_init(&rb->social);          /* V14: social brain */
+    meta_init(&rb->meta);                /* V15: metacognition */
     
-    brain_log(rb, "Rethink Brain initialized — all modules online (V11: sensory expansion)");
+    brain_log(rb, "Rethink Brain initialized — all modules online (V15: metacognition)");
     return rb;
 }
 
@@ -111,9 +115,17 @@ Experience rethink_experience(RethinkBrain *rb, const float *input, int dim,
     rb->current_emotion = emo.emotion;
     exp.emotional_valence = emo.valence;
     
-    /* Step 3: Attention — more surprising/emotional = more attention */
-    rb->attention_level = fminf(1.0f, 
-        0.3f + exp.surprise * 0.4f + fabsf(exp.emotional_valence) * 0.3f);
+    /* Step 3: Attention — V12 biased competition replaces simple heuristic */
+    {
+        attention_clear_items(&rb->attention);
+        attention_add_item(&rb->attention, exp.features, copy_dim,
+                           0.5f + exp.surprise * 0.3f,
+                           fabsf(exp.emotional_valence),
+                           label ? label : "input");
+        attention_process(&rb->attention);
+        attention_check_capture(&rb->attention);
+        rb->attention_level = attention_level(&rb->attention);
+    }
     
     /* Step 4: Classify using prototypes */
     char cat_name[32];

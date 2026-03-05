@@ -1,13 +1,17 @@
 /*
  * rethink_brain.h — The Complete Rethink Brain
  *
- * Rethink AI — Phase 11 / V11
+ * Rethink AI — Phase 15 / V15
  *
  * Connects every module:
  *   - Retina (perception)
  *   - Auditory System (hearing)          [V11]
  *   - Tactile System (touch)             [V11]
  *   - Multi-Modal Binding (fusion)       [V11]
+ *   - Attention System (competition)     [V12]
+ *   - Motor System (action + learning)   [V13]
+ *   - Social Brain (ToM + trust)         [V14]
+ *   - Metacognition (confidence + self)  [V15]
  *   - SOM (spatial mapping)
  *   - Spiking Network (neural substrate)
  *   - Hebbian/STDP (learning)
@@ -40,6 +44,10 @@
 #include "thinking/dream.h"
 #include "modular/brain.h"
 #include "modular/emotion.h"
+#include "modular/attention.h"
+#include "motor/motor.h"
+#include "social/social.h"
+#include "meta/meta.h"
 #include "understanding/predictor.h"
 #include "understanding/causal.h"
 #include "communication/comm.h"
@@ -91,10 +99,14 @@ typedef struct {
     PredictiveNet *predictor;
     CausalNet *causal;
     CommEngine *comm;
+    AttentionSystem attention;       /* V12: biased competition attention */
+    MotorSystem motor;               /* V13: basal ganglia action selection */
+    SocialSystem social;             /* V14: ToM, trust, mirror neurons */
+    MetaSystem meta;                   /* V15: metacognition, confidence, self-model */
     
     /* Current state */
     float current_features[RETHINK_FEATURE_DIM];
-    float attention_level;       /* 0=zoned_out, 1=hyper_focused */
+    float attention_level;       /* 0=zoned_out, 1=hyper_focused (now driven by attention system) */
     float overall_understanding; /* Running average of understanding */
     float overall_surprise;      /* Running average of surprise */
     EmotionType current_emotion;

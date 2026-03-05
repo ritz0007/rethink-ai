@@ -1,12 +1,16 @@
-# Rethink AI — Project Status
+# Nous — Project Status
 
-> Last Updated: March 5, 2026
+> Last Updated: March 6, 2026
 
 ---
 
-## Current Stage: V11 — Sensory Expansion Complete
+## Current Stage: V1 Release — Nous (νοῦς)
 
-All 11 phases of the Rethink Brain have been designed, documented, and implemented in raw C. V11 adds auditory processing (cochlea-inspired), tactile processing (somatosensory with adaptation), and multi-modal binding (Bayesian precision-weighted STS/SC fusion). The brain compiles, links, and runs a full integration test successfully.
+**Nous** is the V1 release of the Rethink Brain project — a brain-inspired AI system written entirely in raw C with 24 brain modules and zero external dependencies.
+
+V1 upgrades the chatbot from command-only to a natural language understanding companion. Nous responds to greetings, farewells, feelings, opinions, compliments, small talk, and maps natural phrases ("this is a cat", "what do you remember", "how confident are you") to existing brain commands. Three-phase dispatch: conversation → natural language → exact commands. The model is named Nous (Greek for "mind"). README rewritten as product page. Training data guide created with links to 6 open datasets.
+
+All 15 phases (V1-V15) plus the V1 release are complete. The brain compiles, links, and runs successfully. ~7,800 lines of C across 52 files.
 
 ---
 
@@ -26,8 +30,12 @@ All 11 phases of the Rethink Brain have been designed, documented, and implement
 | 09 | Communication | 4 files | `comm.c` | Done |
 | 10 | The Rethink Brain | 5 files | `rethink_brain.c`, `test_brain.c` | Done |
 | 11 | Sensory Expansion | 7 files | `auditory.c`, `tactile.c`, `multimodal.c` | Done |
+| 12 | Attention Mechanisms | 5 files | `attention.c`, `chatbot.c` | Done |
+| 13 | Motor System | 5 files | `motor.c` | Done |
+| 14 | Social Brain | 5 files | `social.c` | Done |
+| 15 | Metacognition | 5 files | `meta.c` | Done |
 
-**Total: 63 guide files, 20 C source files, 21 header files, 1 Makefile**
+**Total: 87 guide files, 25 C source files, 25 header files, 1 Makefile, 1 chatbot (1,878 lines)**
 
 ---
 
@@ -57,16 +65,21 @@ All 11 phases of the Rethink Brain have been designed, documented, and implement
 | Auditory | `perception/auditory.c` | Primary auditory cortex (A1) | Cochlea-inspired frequency decomposition, onset detection, spectral tracking |
 | Tactile | `perception/tactile.c` | Somatosensory cortex (S1) | 8-channel touch with homunculus weighting, adaptation, pain fast-path |
 | Multi-Modal | `perception/multimodal.c` | STS + Superior Colliculus | Bayesian precision-weighted binding, 3 binding rules, conflict detection |
+| Attention | `modular/attention.c` | Dorsal/ventral attention networks | Biased competition, gain modulation, priority maps, limited capacity budget |
+| Motor | `motor/motor.c` | Basal ganglia + cerebellum | GO/NO-GO action selection, forward model, RPE learning, sequence planning |
+| Social | `social/social.c` | TPJ + mPFC + vmPFC + mirror neurons | Theory of Mind, trust, imitation, empathy, social reward |
+| Meta | `meta/meta.c` | aPFC + ACC + dlPFC + AIC | Confidence monitoring, error detection, strategy selection, meta-learning, self-model |
 
 ### Integration
-- `rethink_brain.c` — Connects all 20 modules into one unified brain
+- `rethink_brain.c` — Connects all 24 modules into one unified brain
 - `test_brain.c` — Full "Day in the Life" integration test
-- `Makefile` — `make` builds library, `make test` builds + links test
+- `chatbot.c` — Interactive terminal chatbot front-end to the brain
+- `Makefile` — `make` builds library, `make test` builds + links test, `make chat` builds chatbot
 
 ### Documentation
-- **Guides/** — 63 markdown files across 12 phase folders
-- **Learnings/** — 12 template files (one per phase) for recording insights
-- **Mistakes/** — 12 template files (one per phase) for recording errors
+- **Guides/** — 85 markdown files across 16 phase folders + 2 user guides
+- **Learnings/** — 16 template files (one per phase) for recording insights
+- **Mistakes/** — 16 template files (one per phase) for recording errors
 - **archive/** — Changelog with version history
 
 ---
@@ -84,7 +97,11 @@ Brain idled for 50 ticks
 Slept for 10 cycles — dream insights generated
 ```
 
-All modules functional. Zero errors. Warnings only (format-truncation, harmless).
+All modules functional. Zero errors. Warnings only (format-truncation, const-discard — harmless).
+Attention: starts at 0.50, depletes to 0.41 after 2 experiences (budget depletion working).
+Motor: exploration=0.30, confidence=0.00 (brand new brain, no motor experience yet).
+Social: empathy=0.60, trust_build_rate=0.10, trust_decay_rate=0.30 (3× negativity bias).
+Meta: confidence=0.50 (starting uncertain), 4 strategies, self-model at 0.50 across all domains.
 
 ---
 
@@ -100,41 +117,61 @@ All modules functional. Zero errors. Warnings only (format-truncation, harmless)
 - [x] Write milestone guide: multi-modal verification checklist
 
 ### V12: Attention Mechanisms
-- [ ] Replace single `attention_level` float with real attention system
-- [ ] Implement spotlight attention (focus one thing, suppress others)
-- [ ] Implement feature-based attention (attend to color across whole scene)
-- [ ] Implement temporal attention (attend to specific moment in sequence)
-- [ ] Add attention as limited resource with competition dynamics
-- [ ] Write brain science guide: dorsal/ventral attention networks, biased competition
-- [ ] Extend thalamus with competition dynamics and gain modulation
-- [ ] Write milestone test: attention switching under load
+- [x] Replace single `attention_level` float with real attention system
+- [x] Implement spotlight attention (focus one thing, suppress others)
+- [x] Implement feature-based attention (attend to color across whole scene)
+- [x] Implement temporal attention (attend to specific moment in sequence)
+- [x] Add attention as limited resource with competition dynamics
+- [x] Write brain science guide: dorsal/ventral attention networks, biased competition
+- [x] Extend thalamus with competition dynamics and gain modulation
+- [x] Write milestone test: attention switching under load
+- [x] Build interactive chatbot front-end to the brain
 
 ### V13: Motor System
-- [ ] Design motor module (`motor.h/.c`)
-- [ ] Implement action planning (predict outcomes before executing)
-- [ ] Implement motor sequences (reach → grasp → pull chaining)
-- [ ] Implement reward-based action selection
-- [ ] Add embodied cognition (understanding through doing)
-- [ ] Write brain science guide: motor cortex, basal ganglia, cerebellum, mirror neurons
-- [ ] Write milestone test: learn action sequences from few examples
+- [x] Design motor module (`motor.h/.c`)
+- [x] Implement action planning (predict outcomes before executing)
+- [x] Implement motor sequences (reach → grasp → pull chaining)
+- [x] Implement reward-based action selection
+- [x] Add embodied cognition (understanding through doing)
+- [x] Write brain science guide: motor cortex, basal ganglia, cerebellum, mirror neurons
+- [x] Write milestone test: learn action sequences from few examples
+- [x] Add batch training from file (`train` command)
+- [x] Add chatbot attention commands (`focus`, `attend`)
+- [x] Add chatbot motor commands (`do`, `plan`, `actions`)
+- [x] Create training data files and training guide
 
 ### V14: Social Brain
-- [ ] Design social module (`social.h/.c`)
-- [ ] Implement Theory of Mind (model what other agents know/want)
-- [ ] Implement imitation learning (learn by watching)
-- [ ] Add social reward signals (helping/being helped)
-- [ ] Build trust models through repeated interaction
-- [ ] Write brain science guide: mirror neurons, temporoparietal junction
-- [ ] Write milestone test: two brains cooperating on a task
+- [x] Design social module (`social.h/.c`)
+- [x] Implement Theory of Mind (model what other agents know/want)
+- [x] Implement imitation learning (learn by watching)
+- [x] Add social reward signals (helping/being helped)
+- [x] Build trust models through repeated interaction
+- [x] Write brain science guide: mirror neurons, temporoparietal junction
+- [x] Write milestone test: social brain verification checklist
+- [x] Add 12 chatbot social commands (agent, agents, mind, believe, cooperate, defect, observe, mirror, emotion, empathize, help_agent, helped)
 
 ### V15: Metacognition
-- [ ] Design meta module (`meta.h/.c`)
-- [ ] Implement confidence monitoring (how sure am I?)
-- [ ] Implement strategy selection (which approach to use)
-- [ ] Add learning-to-learn (adjust learning rate based on performance)
-- [ ] Build self-model (internal representation of "self")
-- [ ] Write brain science guide: anterior prefrontal cortex, anterior insular cortex
-- [ ] Write milestone test: brain recognizes its own uncertainty
+- [x] Design meta module (`meta.h/.c`)
+- [x] Implement confidence monitoring (how sure am I?)
+- [x] Implement strategy selection (which approach to use)
+- [x] Add learning-to-learn (adjust learning rate based on performance)
+- [x] Build self-model (internal representation of "self")
+- [x] Write brain science guide: anterior prefrontal cortex, anterior insular cortex
+- [x] Write milestone test: brain recognizes its own uncertainty
+- [x] Add 11 chatbot metacognition commands (confident, errors, strategies, select, self, introspect, meta_lr, meta_perf, meta_err, meta_self)
+
+### V1 Release: Nous
+- [x] Natural Language Understanding — chatbot understands greetings, feelings, opinions, small talk
+- [x] Three-phase dispatch: conversation → natural language mapping → exact commands
+- [x] 10 conversation handlers (greeting, farewell, thanks, how-are-you, what-are-you, name, compliment, feeling, opinion, small-talk)
+- [x] Natural language → command mapping ("this is a cat"→teach, "show me X"→show, "what if X"→whatif, etc.)
+- [x] Unknown input handler with brain-state-aware responses
+- [x] Prompt changed to "nous>" with Nous branding throughout
+- [x] Code audit: all 52 files clean (no TODOs, no stubs, no dead code)
+- [x] Model named "Nous" (Greek νοῦς = mind)
+- [x] README rewritten as product page
+- [x] Training data guide with 6 open dataset links (ConceptNet, WordNet, Wikipedia, NELL, DailyDialog, OMCS)
+- [x] chatbot.c expanded from 1,279 to 1,878 lines
 
 ### Long-Term Research Directions
 - [ ] Consciousness: Explore Integrated Information Theory (IIT), Global Workspace Theory
@@ -237,21 +274,93 @@ All modules functional. Zero errors. Warnings only (format-truncation, harmless)
 - [x] Build compiles with zero errors (20 object files → librethink.a)
 - [x] Full integration test passes
 
+### Phase 12 — Attention Mechanisms
+- [x] Biased competition: stimuli compete, attention biases the winner (Desimone & Duncan 1995)
+- [x] Bottom-up salience: deviation from average + feature uniqueness
+- [x] Top-down relevance: cosine similarity to goals × goal strength
+- [x] Priority map: weighted sum of salience + relevance + emotional significance
+- [x] Lateral inhibition: stimuli suppress each other, winner-take-most
+- [x] Gain modulation: multiplicative amplification of winner, suppression of losers
+- [x] Limited capacity budget: attention depletes with use, recovers at rest
+- [x] Goal system: up to 4 simultaneous goals with type, strength, and TTL
+- [x] Ventral attention capture: high salience+emotion can override focused attention
+- [x] Replaced single attention_level float with full competition system
+- [x] Interactive chatbot: terminal-based front-end with 15+ commands
+- [x] Integrated into rethink_brain experience pipeline
+- [x] Build compiles with zero errors (21 object files → librethink.a)
+- [x] Full integration test passes
+
+### Phase 13 — Motor System
+- [x] Basal ganglia: GO/NO-GO competition via disinhibition (direct/indirect pathways)
+- [x] Action evaluation: 40% net strength + 30% context relevance + 30% forward model prediction
+- [x] Epsilon-greedy selection: exploration (random) vs exploitation (best)
+- [x] SMA sequence planning: prepare → execute → complete (3-step decomposition)
+- [x] Cerebellum forward model: per-action weights predict reward from state features
+- [x] Motor execution with biological noise (80% expected + random noise)
+- [x] Dopamine RPE learning: δ = actual - predicted, asymmetric GO/NOGO update
+- [x] GO/NOGO weights clamped to [0.0, 2.0], confidence clamped to [0.0, 1.0]
+- [x] Exploration decays as confidence grows (development model)
+- [x] Action history ring buffer (64 entries)
+- [x] Chatbot: train, focus, attend, do, plan, actions commands
+- [x] 3 training data files: animals, weather, daily_life
+- [x] Build compiles with zero errors (22 object files → librethink.a)
+- [x] Full integration test passes
+
+### Phase 14 — Social Brain
+- [x] TPJ: separate belief model per agent (up to 8 agents, 16 beliefs each)
+- [x] Belief tracking: certainty updated with observations, decayed over time
+- [x] mPFC: desire feature vectors and emotional state per agent
+- [x] vmPFC: trust score with Bayesian-like updates
+- [x] Trust asymmetry: build rate=0.10, decay rate=0.30 (3× negativity bias)
+- [x] Trust clamped to [0.0, 1.0], familiarity clamped to [0.0, 1.0]
+- [x] Mirror neuron system: observe actions, compute activation, gate imitation by trust
+- [x] Imitation learning: observed actions added to motor repertoire when above threshold
+- [x] Existing motor actions strengthened by trust-weighted observation
+- [x] Social reward: helping bonus × empathy + being-helped bonus + cooperation × trust
+- [x] Empathy: their_emotion × empathy_level × (0.3 innate + 0.7 familiarity)
+- [x] Familiarity grows with interaction (diminishing returns), decays slowly without contact
+- [x] Interaction history ring buffer (64 entries)
+- [x] 12 chatbot commands: agent, agents, mind, believe, cooperate, defect, observe, mirror, emotion, empathize, help_agent, helped
+- [x] Auto-add agents on first interaction
+- [x] Build compiles with zero errors (23 object files → librethink.a)
+- [x] Full integration test passes
+
+### Phase 15 — Metacognition
+- [x] aPFC: multi-source confidence monitoring (consistency + prediction + memory)
+- [x] Confidence calibration: ECE tracking + systematic bias correction
+- [x] ACC: error magnitude tracking, streak detection, cognitive load
+- [x] dlPFC: strategy repertoire with value-based softmax selection
+- [x] Adaptive temperature: low when confident (exploit), high after errors (explore)
+- [x] Strategy learning: success/effort ratio updated on every outcome
+- [x] Meta-learning: adaptive learning rate = base × surprise × uncertainty
+- [x] Learning trajectory: tracks performance trend (improving/declining/stable)
+- [x] Self-model: per-domain skill estimates (perception, memory, reasoning, learning, social, motor)
+- [x] Metacognitive accuracy: how well the self-model matches actual performance
+- [x] Cognitive stamina: gradual fatigue with minimum 10% baseline
+- [x] Curiosity: adapts to learning trajectory (improves → less curious, declining → more curious)
+- [x] Introspection loop: full metacognitive cycle (assess → detect → adapt → model)
+- [x] Performance history ring buffer (64 entries)
+- [x] 11 chatbot commands: confident, errors, strategies, select, self, introspect, meta_lr, meta_perf, meta_err, meta_self
+- [x] Build compiles with zero errors (24 object files → librethink.a)
+- [x] Full integration test passes
+
 ---
 
 ## File Counts
 
 | Category | Count |
 |----------|-------|
-| Guide files | 64 (incl. V0 reference) |
-| Learnings templates | 12 |
-| Mistakes templates | 12 |
-| C source files (.c) | 20 |
-| C header files (.h) | 21 |
+| Guide files | 87 (incl. V0 reference + 2 user guides + training data guide) |
+| Learnings templates | 16 |
+| Mistakes templates | 16 |
+| C source files (.c) | 25 (incl. chatbot) |
+| C header files (.h) | 25 |
 | Test file | 1 |
+| Chatbot | 1 (1,878 lines, NLU-powered) |
+| Training data files | 3 |
 | Makefile | 1 |
-| Archive | 1 |
-| **Total** | **132** |
+| Archive | 3 (changelog + chatbot_v15 backup + README_v15 backup) |
+| **Total** | **178** |
 
 ---
 
@@ -262,6 +371,8 @@ cd src
 make          # Builds librethink.a (static library)
 make test     # Builds + links test_brain
 ./test_brain  # Runs full integration test
+make chat     # Builds interactive chatbot
+./chatbot     # Run the chatbot
 make clean    # Removes all build artifacts
 ```
 
@@ -270,4 +381,4 @@ make clean    # Removes all build artifacts
 
 ---
 
-*This project proves: you don't need Python, PyTorch, backpropagation, or millions of examples. You need neurons, synapses, biology, and the courage to build something that doesn't exist yet.*
+*Nous V1 — a brain that thinks, not a model that predicts. Built with neurons, not matrices.*

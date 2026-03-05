@@ -28,6 +28,10 @@ SRCS = \
 	thinking/dream.c \
 	modular/brain.c \
 	modular/emotion.c \
+	modular/attention.c \
+	motor/motor.c \
+	social/social.c \
+	meta/meta.c \
 	understanding/predictor.c \
 	understanding/causal.c \
 	communication/comm.c \
@@ -47,6 +51,14 @@ test_brain: test_brain.o librethink.a
 test_brain.o: test_brain.c rethink_brain.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# ──── Chatbot binary ────
+chat: chatbot
+chatbot: chatbot.o librethink.a
+	$(CC) $(CFLAGS) -o $@ $< -L. -lrethink $(LDFLAGS)
+
+chatbot.o: chatbot.c rethink_brain.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
 # ──── Pattern rule for .c → .o ────
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -54,10 +66,10 @@ test_brain.o: test_brain.c rethink_brain.h
 # ──── Clean ────
 clean:
 	find . -name '*.o' -delete
-	rm -f librethink.a test_brain
+	rm -f librethink.a test_brain chatbot
 
 # ──── Phony targets ────
-.PHONY: clean test
+.PHONY: clean test chat
 
 # ──── Dependencies (key headers) ────
 neurons/neuron.o: neurons/neuron.c neurons/neuron.h
@@ -76,6 +88,10 @@ thinking/spontaneous.o: thinking/spontaneous.c thinking/spontaneous.h
 thinking/dream.o: thinking/dream.c thinking/dream.h memory/decay.h
 modular/brain.o: modular/brain.c modular/brain.h
 modular/emotion.o: modular/emotion.c modular/emotion.h
+modular/attention.o: modular/attention.c modular/attention.h
+motor/motor.o: motor/motor.c motor/motor.h
+social/social.o: social/social.c social/social.h
+meta/meta.o: meta/meta.c meta/meta.h
 understanding/predictor.o: understanding/predictor.c understanding/predictor.h
 understanding/causal.o: understanding/causal.c understanding/causal.h
 communication/comm.o: communication/comm.c communication/comm.h

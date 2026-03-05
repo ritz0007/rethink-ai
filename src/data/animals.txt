@@ -1,0 +1,73 @@
+# Animals — Basic categories and knowledge
+# Train: brain> train data/animals.txt
+
+# Categories
+category cat
+category dog
+category bird
+category fish
+category horse
+category snake
+category rabbit
+category elephant
+category bear
+category wolf
+
+# Animal cause-effect relationships
+cause cat -> purring 0.8
+cause cat -> hunting 0.6
+cause cat -> climbing 0.5
+cause dog -> barking 0.9
+cause dog -> loyalty 0.85
+cause dog -> fetching 0.6
+cause bird -> flying 0.7
+cause bird -> singing 0.8
+cause bird -> nesting 0.7
+cause fish -> swimming 0.95
+cause snake -> venom 0.4
+cause snake -> shedding 0.7
+cause horse -> galloping 0.8
+cause horse -> neighing 0.6
+cause elephant -> trumpeting 0.75
+cause elephant -> memory 0.9
+cause bear -> hibernating 0.7
+cause wolf -> howling 0.8
+cause wolf -> pack_hunting 0.85
+cause rabbit -> hopping 0.9
+
+# Ecological chains
+cause rain -> grass 0.7
+cause grass -> rabbit 0.6
+cause rabbit -> fox 0.5
+cause fox -> hunting 0.8
+cause hunting -> survival 0.7
+
+# Vocabulary
+vocab furry
+vocab scaly
+vocab feathered
+vocab large
+vocab small
+vocab fast
+vocab slow
+vocab wild
+vocab domestic
+vocab predator
+vocab prey
+vocab nocturnal
+
+# Experiences — give the brain samples to classify
+experience cat fluffy_kitten
+experience cat orange_tabby
+experience cat siamese_cat
+experience dog golden_retriever
+experience dog small_poodle
+experience dog husky_wolf_like
+experience bird red_robin
+experience bird blue_jay
+experience bird eagle_soaring
+experience fish goldfish
+experience fish salmon_jumping
+experience horse brown_stallion
+experience snake green_python
+experience rabbit white_bunny

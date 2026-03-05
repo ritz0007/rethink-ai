@@ -1,0 +1,52 @@
+# Daily Life — Actions and consequences
+# Train: brain> train data/daily_life.txt
+
+# Categories
+category food
+category drink
+category tool
+category vehicle
+category furniture
+category clothing
+category emotion
+
+# Daily activity causal chains
+cause hunger -> eating 0.9
+cause eating -> satisfaction 0.8
+cause eating -> energy 0.7
+cause overeating -> stomachache 0.5
+cause thirst -> drinking 0.9
+cause drinking_water -> hydration 0.85
+cause exercise -> tiredness 0.7
+cause exercise -> health 0.8
+cause exercise -> strength 0.6
+cause sleep -> rest 0.9
+cause rest -> energy 0.8
+cause sleep_deprivation -> fatigue 0.9
+cause fatigue -> mistakes 0.5
+cause study -> knowledge 0.7
+cause study -> tiredness 0.5
+cause knowledge -> confidence 0.6
+cause work -> money 0.8
+cause money -> shopping 0.6
+cause shopping -> happiness 0.4
+cause loneliness -> sadness 0.6
+cause friendship -> happiness 0.7
+cause music -> relaxation 0.6
+cause reading -> knowledge 0.7
+cause coffee -> alertness 0.8
+cause alertness -> productivity 0.7
+
+# Vocabulary
+vocab eat
+vocab drink
+vocab run
+vocab walk
+vocab sleep
+vocab think
+vocab read
+vocab write
+vocab build
+vocab create
+vocab help
+vocab learn

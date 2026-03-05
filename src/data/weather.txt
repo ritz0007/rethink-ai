@@ -1,0 +1,51 @@
+# Weather & Nature — Causal chains
+# Train: brain> train data/weather.txt
+
+# Categories
+category sunny
+category rainy
+category cloudy
+category stormy
+category snowy
+category windy
+category foggy
+
+# Weather causal chains
+cause sun -> warmth 0.9
+cause warmth -> evaporation 0.7
+cause evaporation -> clouds 0.8
+cause clouds -> rain 0.6
+cause clouds -> shade 0.9
+cause rain -> wet_ground 0.95
+cause wet_ground -> slipping 0.5
+cause wet_ground -> puddles 0.8
+cause wet_ground -> mud 0.7
+cause rain -> rainbow 0.3
+cause rain -> umbrella 0.7
+cause rain -> flooding 0.2
+cause cold -> frost 0.7
+cause cold -> snow 0.5
+cause cold -> ice 0.6
+cause snow -> snowman 0.6
+cause snow -> skiing 0.5
+cause ice -> slipping 0.7
+cause storm -> thunder 0.9
+cause storm -> lightning 0.85
+cause storm -> power_outage 0.3
+cause storm -> flooding 0.4
+cause wind -> kite_flying 0.5
+cause wind -> fallen_trees 0.2
+cause wind -> waves 0.6
+cause fog -> low_visibility 0.9
+cause fog -> accidents 0.3
+cause drought -> wildfires 0.5
+cause wildfires -> smoke 0.9
+cause smoke -> air_pollution 0.8
+
+# Vocabulary
+vocab temperature
+vocab humidity
+vocab precipitation
+vocab forecast
+vocab climate
+vocab season
