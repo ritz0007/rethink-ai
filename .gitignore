@@ -1,0 +1,32 @@
+# Build artifacts
+*.o
+*.a
+*.so
+*.dylib
+
+# Compiled binaries
+src/test_brain
+src/librethink.a
+
+# Editor files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Debug
+*.dSYM/
+*.pdb
+
+# Temporary
+*.tmp
+*.bak
+*.orig
